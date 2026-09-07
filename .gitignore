@@ -1,0 +1,15 @@
+.venv/
+
+# 녹음 원본 및 변환 결과
+*.mp3
+*.m4a
+*.wav
+*.flac
+*.ogg
+*.opus
+*.mp4
+*.mkv
+*.mov
+*.txt
+*.srt
+*.timestamped.md
