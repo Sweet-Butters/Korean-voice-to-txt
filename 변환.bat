@@ -1,14 +1,17 @@
 @echo off
-chcp 65001 >nul
-rem ë…¹ìŒ íŒŒì¼ì„ ì´ ë°°ì¹˜íŒŒì¼ ìœ„ì— ë“œë˜ê·¸&ë“œë¡­í•˜ë©´ ë³€í™˜ë©ë‹ˆë‹¤.
 setlocal
+rem Drag and drop a recording onto this file to transcribe it.
 set "HERE=%~dp0"
-if "%~1"=="" (
-  echo ì‚¬ìš©ë²•: ë…¹ìŒ íŒŒì¼ì„ ì´ íŒŒì¼ ìœ„ë¡œ ë“œë˜ê·¸í•´ì„œ ë†“ìœ¼ì„¸ìš”.
-  echo    ë˜ëŠ”: ë³€í™˜.bat "C:\ê²½ë¡œ\ë…¹ìŒ.m4a"
-  pause
-  exit /b 1
-)
+if "%~1"=="" goto usage
+
 "%HERE%.venv\Scripts\python.exe" "%HERE%transcribe.py" %*
 echo.
 pause
+exit /b 0
+
+:usage
+echo »ç¿ë¹ı: ³ìÀ½ ÆÄÀÏÀ» ÀÌ ÆÄÀÏ À§·Î µå·¡±×ÇØ¼­ ³õÀ¸¼¼¿ä.
+echo    ¶Ç´Â: º¯È¯.bat "C:\°æ·Î\³ìÀ½.m4a"
+echo.
+pause
+exit /b 1

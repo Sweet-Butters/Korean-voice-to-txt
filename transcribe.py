@@ -112,6 +112,8 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=None, help="출력 폴더 (기본: 원본과 같은 위치)")
     ap.add_argument("--compute-type", default="int8", help="int8 / int8_float32 / float32 (기본: int8)")
     ap.add_argument("--threads", type=int, default=0, help="CPU 스레드 수 (0=자동)")
+    ap.add_argument("--beam", type=int, default=5,
+                    help="빔 크기. 1로 낮추면 30%% 정도 빨라지고 정확도는 조금 내려갑니다 (기본: 5)")
     ap.add_argument("--prompt", default="", help="고유명사/용어를 미리 알려주면 인식률이 올라갑니다")
     ap.add_argument("--no-vad", action="store_true", help="무음 구간 제거(VAD) 끄기")
     ap.add_argument("--force", action="store_true", help="이미 결과가 있어도 다시 변환")
@@ -144,7 +146,7 @@ def main() -> int:
             str(src),
             language=None if args.lang == "auto" else args.lang,
             initial_prompt=args.prompt or None,
-            beam_size=5,
+            beam_size=args.beam,
             vad_filter=not args.no_vad,
             vad_parameters={"min_silence_duration_ms": 500},
             condition_on_previous_text=False,  # 긴 녹음에서 같은 문장 반복되는 것 방지
